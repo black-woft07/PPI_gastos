@@ -11,6 +11,8 @@ function App() {
   const [activeTab, setActiveTab] = useState('balance')
 
   useEffect(() => {
+    if (!supabase) return
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
     })
@@ -23,6 +25,17 @@ function App() {
 
     return () => listener.subscription.unsubscribe()
   }, [])
+
+  if (!supabase) {
+    return (
+      <main role="alert" style={{ maxWidth: 600, margin: '64px auto', padding: '0 20px' }}>
+        <h1>Configuración requerida</h1>
+        <p>Faltan las variables de conexión a Supabase. Configúralas en el archivo <code>.env.local</code>:</p>
+        <p><code>VITE_SUPABASE_URL</code></p>
+        <p><code>VITE_SUPABASE_ANON_KEY</code></p>
+      </main>
+    )
+  }
 
   const handleLogout = async () => {
     await supabase.auth.signOut()

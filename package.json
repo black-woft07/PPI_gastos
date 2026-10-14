@@ -1,0 +1,13 @@
+{
+  "name": "ppi_gastos",
+  "private": true,
+  "workspaces": [
+    "2026-09-16"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=2026-09-16",
+    "build": "npm run build --workspace=2026-09-16",
+    "lint": "npm run lint --workspace=2026-09-16",
+    "preview": "npm run preview --workspace=2026-09-16"
+  }
+}
